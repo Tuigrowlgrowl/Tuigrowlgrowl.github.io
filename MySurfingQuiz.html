@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sylvie's Surfing Quiz 🌊</title>
+  <style>
+    #colorChangeDiv {
+      width: 1450px;
+      height: 500px;
+      background-color: white;
+      transition: background-color 0.00001s;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sylvie's Surfing Quiz 🌊</h1>
+  <h2>Warning: Reloading your page will reset your quiz progress</h2>
+  <div id="quiz"></div>
+  <button id="submit">Submit all quiz answers</button>
+  <button onclick="clueMenu()">Click for 'Clue Menu'</button>
+  <div id="result"></div>
+
+  <script>
+    const questions = [
+      {
+        question: "What is the term used to describe catching a wave?",
+        choices: ["Paddling", "Dropping", "Catching", "Riding"],
+        correctAnswer: "Catching"
+      },
+      {
+        question: "Which type of surfboard is best for beginners?",
+        choices: ["Shortboard", "Longboard", "Small Board", "Beginner Board"],
+        correctAnswer: "Longboard"
+      },
+      {
+        question: "What is riding inside the tube of a wave called?",
+        choices: ["Carving", "Floater", "Cutback", "Barrel"],
+        correctAnswer: "Barrel"
+      },
+      {
+        question: "What does the term 'grom' refer to in surfing?", 
+        choices: ["A type of wave", "A surfing competition", "A young surfer", "A surfboard shape"],
+        correctAnswer: "A young surfer"
+      },
+      {
+        question: "What does the term 'Leggie' mean in surfing?",
+        choices: ["A missed wave", "The leg rope", "The bottom part of the wet suit", "Board wax"],
+        correctAnswer: "The leg rope"
+      },
+      {
+        question: "What wave is the easiest to ride?", 
+        choices: ["A tsunami", "Dumping wave", "Rolling wave", "Surging wave"],
+        correctAnswer: "Rolling wave"
+      },
+    ];
+
+    // Function to create the quiz and display questions.
+    function createQuiz() {
+      const quizContainer = document.getElementById("quiz");
+      let quizHTML = "";
+
+      questions.forEach((question, index) => {
+        quizHTML += `<p>${index + 1}. ${question.question}</p>`;
+        question.choices.forEach((choice, choiceIndex) => {
+          quizHTML += `
+            <label>
+              <input type="radio" name="question${index}" value="${choice}">
+              ${choice}
+            </label><br>
+          `;
+        });
+      });
+
+      quizContainer.innerHTML = quizHTML;
+    }
+
+    function clueMenu() {
+      alert("Q1: Catching Q2: Longboard Q3: Barrel Q4: A Young Surfer Q5: The leg rope Q6: Rolling wave");
+    }
+
+    createQuiz(); // Call the createQuiz function to display the questions
+  </script>
+
+  <button id="colorButton" onclick="startCelebration()">Start CELEBRATION</button>
+
+  <div id="colorChangeDiv" style="width: 1450px; height: 500px;"></div>
+
+  <script>
+    function startCelebration() {
+      const colors = ["green", "red", "yellow", "pink", "purple", "orange", "blue", "magenta"];
+      let colorIndex = 0;
+      let intervalId = null;
+
+      const colorChangeDiv = document.getElementById("colorChangeDiv");
+      colorChangeDiv.style.backgroundColor = colors[colorIndex];
+
+      intervalId = setInterval(function () {
+        colorIndex = (colorIndex + 1) % colors.length;
+        colorChangeDiv.style.backgroundColor = colors[colorIndex];
+      }, 200); //200 miliseconds is 0.2 seconds
+    }
+
+    //function to calculate the users score and display the result out of the total amount of questions
+function showResult() {
+  const userAnswers = [];
+  let score = 0;
+
+  questions.forEach((question, index) => {
+    const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+    if (selectedOption) {
+      const userAnswer = selectedOption.value;
+      userAnswers.push(userAnswer);
+      if (userAnswer === question.correctAnswer) {
+        score++;
+      }
+    }
+  });
+//${score} is how many questions the user got correct and ${questions.length} is the total amount of questions in my quiz. 
+  const resultContainer = document.getElementById("result");
+  resultContainer.innerHTML = `<p>Your total score: ${score} out of ${questions.length}, well done! You deserve to celebrate! Find the celebration button.</p>`;
+}
+
+
+document.getElementById("submit").addEventListener("click", function () {
+  showResult();
+});
+
+function submit() {
+            if(userInput.value == quizQuestions[questionState]['answer']) {
+                score ++
+                update ()
+            } else {
+                update ()
+            }
+
+    }
+  </script>
+</body>
+</html>
